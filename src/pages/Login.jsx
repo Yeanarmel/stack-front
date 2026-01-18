@@ -27,7 +27,7 @@ const Login = () => {
               <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline" >Forgoten password?</Link>
             </div>
 
-            <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"><Link to="/home">Log in</Link></button>
+            <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition"><Link to="/">Log in</Link></button>
           </form>
 
           <p className="mt-4 text-sm text-gray-600"> Don't have an account?{" "} 

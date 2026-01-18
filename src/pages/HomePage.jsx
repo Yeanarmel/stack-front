@@ -1,4 +1,3 @@
-import { useState } from "react";
 import QuestionList from "../components/QuestionList";
 import TopUsers from "../components/TopUsers";
 import PopularTags from "../components/PopularTags";
@@ -6,8 +5,6 @@ import { Link } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 const Home = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <DashboardLayout>
       <div className="h-screen flex flex-col">
