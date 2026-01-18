@@ -1,31 +1,47 @@
-import { Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 
-const Navbar = ({ currentUser }) => {
+const Navbar = ({ onMenuClick }) => {
   return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-4">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold text-indigo-600">
+    <header className="w-full bg-white border-b px-4 md:px-6 py-3 flex items-center justify-between gap-4 z-50">
+
+      {/* LEFT */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onMenuClick}
+          className="md:hidden p-2 rounded hover:bg-gray-100"
+        >
+          <Menu size={24} />
+        </button>
+
+        <h1 className="text-lg md:text-xl font-bold text-blue-600">
           Developer Bug Zone
         </h1>
+      </div>
 
-        <div className="relative w-96">
+      {/* SEARCH */}
+      <div className="hidden md:flex flex-1 max-w-xl">
+        <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500"
-            placeholder="Search..."
+            className="w-full border rounded-lg pl-10 pr-4 py-2
+            focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Search questions..."
           />
         </div>
-
-        {currentUser && (
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center">
-              {currentUser.avatar}
-            </div>
-            <span>{currentUser.name}</span>
-          </div>
-        )}
       </div>
-    </nav>
+
+      {/* PROFILE */}
+      <div className="flex items-center gap-2">
+        <img
+          src="https://i.pravatar.cc/40"
+          className="w-9 h-9 rounded-full"
+        />
+        <span className="hidden md:inline font-medium">
+          John Doe
+        </span>
+      </div>
+
+    </header>
   );
 };
 
