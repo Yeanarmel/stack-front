@@ -35,7 +35,7 @@ function App() {
         <Route path="/questions/:id" element={<QuestionDetailsPage />} />
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/tags" element={<TagsPage />} />
-        <Route path="/users/:id" element={<UserProfilePage />} />
+        <Route path="/users/:username" element={<UserProfilePage />} />
         <Route path="/tags" element={<TagsPage />} />
         <Route path="/tags/:tag" element={<TagsPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />

@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import { ThumbsUp, MessageSquare } from "lucide-react";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 const QuestionDetailsPage = () => {
   const { id } = useParams();
@@ -28,71 +27,63 @@ const QuestionDetailsPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
+    <DashboardLayout>
+      {/* Question */}
+      <div className="bg-white rounded-xl p-6 shadow-sm">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+          {question.title}
+        </h1>
 
-      <div className="flex flex-1">
-        <Sidebar />
+        <div className="mt-2 text-sm text-gray-500">
+          Asked by {question.author} • {question.time}
+        </div>
 
-        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
-          {/* Question */}
-          <div className="bg-white rounded-xl p-6 shadow-sm">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
-              {question.title}
-            </h1>
+        <p className="mt-4 text-gray-700">
+          {question.description}
+        </p>
 
-            <div className="mt-2 text-sm text-gray-500">
-              Asked by {question.author} • {question.time}
-            </div>
+        {/* Tags */}
+        <div className="mt-4 flex gap-2 flex-wrap">
+          {question.tags.map((tag) => (
+            <span
+              key={tag}
+              className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
-            <p className="mt-4 text-gray-700">
-              {question.description}
-            </p>
-
-            {/* Tags */}
-            <div className="mt-4 flex gap-2 flex-wrap">
-              {question.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Actions */}
-            <div className="mt-6 flex items-center gap-4">
-              <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
-                <ThumbsUp size={18} /> {question.votes}
-              </button>
-              <span className="flex items-center gap-2 text-gray-600">
-                <MessageSquare size={18} /> {question.answers.length} answers
-              </span>
-            </div>
-          </div>
-
-          {/* Answers */}
-          <div className="mt-8">
-            <h2 className="text-lg font-semibold mb-4">Answers</h2>
-
-            <div className="space-y-4">
-              {question.answers.map((answer) => (
-                <div
-                  key={answer.id}
-                  className="bg-white rounded-xl p-4 shadow-sm"
-                >
-                  <p className="text-gray-700">{answer.content}</p>
-                  <div className="mt-2 text-sm text-gray-500">
-                    {answer.author} • {answer.time}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </main>
+        {/* Actions */}
+        <div className="mt-6 flex items-center gap-4">
+          <button className="flex items-center gap-2 text-gray-600 hover:text-blue-600">
+            <ThumbsUp size={18} /> {question.votes}
+          </button>
+          <span className="flex items-center gap-2 text-gray-600">
+            <MessageSquare size={18} /> {question.answers.length} answers
+          </span>
+        </div>
       </div>
-    </div>
+
+      {/* Answers */}
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold mb-4">Answers</h2>
+
+        <div className="space-y-4">
+          {question.answers.map((answer) => (
+            <div
+              key={answer.id}
+              className="bg-white rounded-xl p-4 shadow-sm"
+            >
+              <p className="text-gray-700">{answer.content}</p>
+              <div className="mt-2 text-sm text-gray-500">
+                {answer.author} • {answer.time}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </DashboardLayout>
   );
 };
 

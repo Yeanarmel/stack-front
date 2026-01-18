@@ -1,8 +1,10 @@
 import { Menu, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ onMenuClick }) => {
   return (
     <header className="w-full bg-white border-b px-4 md:px-6 py-3 flex items-center justify-between gap-4 z-50">
+
 
       {/* LEFT */}
       <div className="flex items-center gap-3">
@@ -31,15 +33,17 @@ const Navbar = ({ onMenuClick }) => {
       </div>
 
       {/* PROFILE */}
-      <div className="flex items-center gap-2">
-        <img
-          src="https://i.pravatar.cc/40"
-          className="w-9 h-9 rounded-full"
-        />
-        <span className="hidden md:inline font-medium">
-          John Doe
-        </span>
-      </div>
+      <Link to={"/users/username"}>
+        <div className="flex items-center gap-2">
+          <img
+            src="https://i.pravatar.cc/40"
+            className="w-9 h-9 rounded-full"
+          />
+          <span className="hidden md:inline font-medium">
+            John Doe
+          </span>
+        </div>
+      </Link>
 
     </header>
   );
