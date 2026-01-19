@@ -1,7 +1,25 @@
 import { Menu, Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API from "../api/api";
 
 const Navbar = ({ onMenuClick }) => {
+  const [user, setUser] = useState(null); // ✅ object or null
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const res = await API.get("/users/me");
+        setUser(res.data.user); // ✅ correct
+      } catch (err) {
+        console.log("User not logged in");
+        setUser(null);
+      }
+    };
+
+    fetchCurrentUser();
+  }, []);
+
   return (
     <header className="w-full bg-white border-b px-4 md:px-6 py-3 flex items-center justify-between gap-4 z-40">
 
@@ -32,17 +50,24 @@ const Navbar = ({ onMenuClick }) => {
       </div>
 
       {/* PROFILE */}
-      <Link to={"/users/username"}>
-        <div className="flex items-center gap-2">
-          <img
-            src="https://i.pravatar.cc/40"
-            className="w-9 h-9 rounded-full"
-          />
-          <span className="hidden md:inline font-medium">
-            John Doe
-          </span>
-        </div>
-      </Link>
+      {user ? (
+        <Link to={`/users/${user._id}`}>
+          <div className="flex items-center gap-2">
+            <img
+              src={`https://ui-avatars.com/api/?name=${user.name}`}
+              className="w-9 h-9 rounded-full"
+              
+            />
+            <span className="hidden md:inline font-medium">
+              {user.name}
+            </span>
+          </div>
+        </Link>
+      ) : (
+        <Link to="/login" className="font-medium text-blue-600">
+          Login
+        </Link>
+      )}
 
     </header>
   );
